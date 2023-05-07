@@ -16,9 +16,9 @@
   "author": "Vyacheslav Egorov",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/vecoweb22/express-mesto-gha/issues"
+    "url": "https://github.com/vecoweb22/express-mesto-gha/issues-main/issues"
   },
-  "homepage": "https://github.com/vecoweb22/express-mesto-gha",
+  "homepage": "https://github.com/vecoweb22/express-mesto-gha-main#readme",
   "dependencies": {
     "body-parser": "^1.20.2",
     "express": "^4.18.2",
