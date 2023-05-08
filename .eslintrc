@@ -1,6 +1,5 @@
 {
   "env": {
-    "browser": true,
     "es2021": true
   },
   "extends": "airbnb-base",
@@ -9,6 +8,7 @@
     "ecmaVersion": "latest"
   },
   "rules": {
+    "linebreak-style": ["error", "windows"],
     "no-underscore-dangle": [
       "error",
       {
@@ -16,7 +16,6 @@
           "_id"
         ]
       }
-    ],
-    "no-console": "off"
+    ]
   }
 }
