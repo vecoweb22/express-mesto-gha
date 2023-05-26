@@ -1,24 +1,19 @@
 const jwt = require('jsonwebtoken');
+const { JWT_SECRET } = require('../utils/constants');
+const AuthorizationError = require('../errors/AuthorizationError');
 
-const { SECRET_SIGNING_KEY } = require('../utils/constants');
-const UnauthorizedError = require('../errors/UnauthorizedError');
-
-module.exports = (req, _, next) => {
+module.exports = (req, res, next) => {
   const { authorization } = req.headers;
-  const bearer = 'Bearer ';
-  const errorMsg = 'Неправильные почта или пароль';
-
-  if (!authorization || !authorization.startsWith(bearer)) {
-    return next(new UnauthorizedError(`${errorMsg}(${authorization})!`));
+  if (!authorization || !authorization.startsWith('Bearer ')) {
+    return next(new AuthorizationError('Необходима авторизация'));
   }
-
-  const token = authorization.replace(bearer, '');
+  const token = authorization.replace('Bearer ', '');
   let payload;
 
   try {
-    payload = jwt.verify(token, SECRET_SIGNING_KEY);
+    payload = jwt.verify(token, JWT_SECRET);
   } catch (err) {
-    return next(new UnauthorizedError(`${errorMsg}!`));
+    return next(new AuthorizationError('Необходима авторизация'));
   }
 
   req.user = payload;
