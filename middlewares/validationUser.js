@@ -32,7 +32,7 @@ module.exports.validUpdateUser = celebrate({
 });
 
 module.exports.validUpdateAvatar = celebrate({
-  params: Joi.object().keys({
+  body: Joi.object().keys({
     avatar: Joi.string().required().pattern(URL_REG_EXP),
   }),
 });

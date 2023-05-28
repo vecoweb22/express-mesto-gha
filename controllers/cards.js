@@ -28,9 +28,9 @@ module.exports.deleteCard = (req, res, next) => {
 
 module.exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
-  const cardOwner = req.user._id;
+  const owner = req.user._id;
 
-  Card.create({ name, link, cardOwner })
+  Card.create({ name, link, owner })
     .then((card) => res.status(201).send(card))
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -49,7 +49,7 @@ module.exports.addLikeCard = (req, res, next) => {
       { new: true },
     )
     .then((card) => {
-      if (card) {
+      if (!card) {
         throw new NotFoundError('Карта не найдена');
       }
       res.send({ data: card });
@@ -70,7 +70,7 @@ module.exports.deleteLikeCard = (req, res, next) => {
       { new: true },
     )
     .then((card) => {
-      if (card) {
+      if (!card) {
         throw new NotFoundError('Карта не найдена');
       }
       res.send({ data: card });
